@@ -8,4 +8,10 @@
  * (Pudiendo combinar todos estos parámetros entre ellos)
  */
 
-def randompassword(contrase):
+def randompassword(length=8, capital=False, numbers=False, symbols=False):
+
+
+    return ""
+
+print(randompassword())
+
