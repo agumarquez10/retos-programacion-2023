@@ -5,21 +5,35 @@ class Player(Enum):
     P2 = 2
 
 
-def tennis_match(points):
+def tennis_match(points: list):
 
     game = ["Love", "15", "30", "40"]
     p1_points = 0
     p2_points = 0
+    finished = False
+    error = False
 
     for player in points:
+
+        error = finished
 
         p1_points += 1 if player == Player.P1 else 0
         p2_points += 1 if player == Player.P2 else 0
 
         if p1_points >= 3 and p2_points >= 3:
-            print("Deuce" if p1_points == p2_points else
-                  "Ventaja P1" if p1_points > p2_points else "Ventaja P2")
+            if not finished and abs(p1_points - p2_points) <= 1:
+                print("Deuce" if p1_points == p2_points else
+                      "Ventaja P1" if p1_points > p2_points else "Ventaja P2")
+            else:
+                finished = True
         else:
-            print(f"{game[p1_points]} - {game[p2_points]}")
+            if p1_points < 4 or p2_points < 4:
+                print(f"{game[p1_points]} - {game[p2_points]}")
+            else: 
+                finished = True
+    print('Los puntos jugados no son correctos' if error else
+          "Ha ganado el P1" if p1_points > p2_points else "Ha ganado el P2")
+    
 
-tennis_match([Player.P1, Player.P1, Player.P2, Player.P2, Player.P1, Player.P1])
+tennis_match([Player.P1, Player.P1, Player.P2, Player.P2, Player.P1, Player.P2, 
+              Player.P2, Player.P1, Player.P1, Player.P1])
